@@ -9,9 +9,15 @@ from app.routers import team, decisions
 
 app = FastAPI(title="FPL+", version="0.1.0")
 
+ALLOWED_ORIGINS = os.getenv("FRONTEND_URL", "*")
+if ALLOWED_ORIGINS != "*":
+    origins = [o.strip() for o in ALLOWED_ORIGINS.split(",")]
+else:
+    origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("FRONTEND_URL", "http://localhost:3000")],
+    allow_origins=origins,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
