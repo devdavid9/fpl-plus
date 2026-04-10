@@ -1,0 +1,564 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/* ─── Modern FPL theme (default) ──────────────────────────── */
+:root {
+  --background: #0c0c14;
+  --foreground: #e2e2ee;
+  --card: #13131f;
+  --card-foreground: #e2e2ee;
+  --popover: #13131f;
+  --popover-foreground: #e2e2ee;
+  --primary: #00ff87;
+  --primary-foreground: #0c0c14;
+  --secondary: #1c1c2c;
+  --secondary-foreground: #e2e2ee;
+  --muted: #191926;
+  --muted-foreground: #6b6b90;
+  --accent: #250030;
+  --accent-foreground: #e2e2ee;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.07);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: #00ff87;
+  --radius: 0.4rem;
+  --sidebar: #0c0c14;
+  --sidebar-foreground: #e2e2ee;
+  --sidebar-primary: #00ff87;
+  --sidebar-primary-foreground: #0c0c14;
+  --sidebar-accent: #191926;
+  --sidebar-accent-foreground: #e2e2ee;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-ring: #00ff87;
+  /* theme-specific extras */
+  --dash-header-from: #1a0020;
+  --dash-header-to: #0c0c14;
+  --primary-glow: #04f5ff;
+  --primary-bg-subtle: rgba(0, 255, 135, 0.08);
+  --primary-bg-strong: rgba(0, 255, 135, 0.25);
+  --primary-border-subtle: rgba(0, 255, 135, 0.2);
+  --grid-line-color: rgba(0, 255, 135, 0.025);
+  --landing-top-glow: rgba(55, 0, 60, 0.75);
+  --landing-bottom-glow: rgba(0, 255, 135, 0.05);
+  --divider-color: rgba(0, 255, 135, 0.3);
+  --rank-dim: #2a2a40;
+}
+
+/* ─── Classic Barclays Premier League theme ────────────────── */
+/* Deep Navy #0B1D51 · Royal Blue #003A8F · Red #E2231A · White */
+html[data-theme="classic"] {
+  --background: #0B1D51;
+  --foreground: #FFFFFF;
+  --card: #003A8F;
+  --card-foreground: #FFFFFF;
+  --popover: #003A8F;
+  --popover-foreground: #FFFFFF;
+  --primary: #E2231A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #0e2a6b;
+  --secondary-foreground: #FFFFFF;
+  --muted: #091847;
+  --muted-foreground: #8a9fc7;
+  --accent: #003A8F;
+  --accent-foreground: #FFFFFF;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #E2231A;
+  --sidebar: #0B1D51;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #E2231A;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #091847;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: rgba(255, 255, 255, 0.12);
+  --sidebar-ring: #E2231A;
+  /* theme-specific extras */
+  --dash-header-from: #003A8F;
+  --dash-header-to: #0B1D51;
+  --primary-glow: #003A8F;
+  --primary-bg-subtle: rgba(226, 35, 26, 0.10);
+  --primary-bg-strong: rgba(226, 35, 26, 0.28);
+  --primary-border-subtle: rgba(226, 35, 26, 0.25);
+  --grid-line-color: rgba(0, 58, 143, 0.04);
+  --landing-top-glow: rgba(0, 58, 143, 0.85);
+  --landing-bottom-glow: rgba(226, 35, 26, 0.06);
+  --divider-color: rgba(226, 35, 26, 0.35);
+  --rank-dim: #0e2a6b;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ─── Landing ──────────────────────────────────────────── */
+.landing-bg {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -5%, var(--landing-top-glow) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 30% at 50% 105%, var(--landing-bottom-glow) 0%, transparent 55%),
+    var(--background);
+}
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+.team-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--foreground);
+  font-family: var(--font-mono), monospace;
+  font-size: 1.25rem;
+  text-align: center;
+  letter-spacing: 0.15em;
+  padding: 14px 24px;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.team-input:focus {
+  border-color: var(--primary);
+  background: var(--primary-bg-subtle);
+  box-shadow: 0 0 0 3px var(--primary-bg-subtle);
+}
+.team-input::placeholder {
+  color: rgba(255, 255, 255, 0.18);
+}
+
+/* ─── Dashboard header ─────────────────────────────────── */
+.dash-header {
+  background: linear-gradient(180deg, var(--dash-header-from) 0%, var(--dash-header-to) 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─── Dashboard body (tab-bar + content wrapper) ───────── */
+.dash-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ─── Tab bar ──────────────────────────────────────────── */
+.tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab-item {
+  flex-shrink: 0;
+  padding: 13px 22px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.tab-item:hover { color: var(--foreground); }
+.tab-item.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ─── Classic / Retro theme overrides ──────────────────── */
+
+/* Solid royal-blue header with thick red stripe — no gradient */
+html[data-theme="classic"] .dash-header {
+  background: #003A8F;
+  border-bottom: 6px solid #E2231A;
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,0.15);
+}
+
+/* Sidebar + content grid */
+html[data-theme="classic"] .dash-body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+@media (max-width: 768px) {
+  html[data-theme="classic"] .dash-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Vertical sidebar nav */
+html[data-theme="classic"] .tab-bar {
+  flex-direction: column;
+  border-bottom: none;
+  border-right: 4px solid #003A8F;
+  background: var(--background);
+  padding: 12px 10px;
+  gap: 6px;
+  overflow-x: visible;
+  overflow-y: auto;
+}
+/* Flatten the inner wrapper so items stack vertically */
+html[data-theme="classic"] .tab-bar > div {
+  flex-direction: column;
+  gap: 6px;
+}
+
+html[data-theme="classic"] .tab-item {
+  border: 3px solid #003A8F;
+  border-bottom: 3px solid #003A8F;
+  margin-bottom: 0;
+  background: var(--secondary);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.25);
+  text-align: center;
+  padding: 10px 14px;
+  color: var(--foreground);
+}
+html[data-theme="classic"] .tab-item:hover {
+  background: #E2231A;
+  color: #FFFFFF;
+  border-color: #E2231A;
+}
+html[data-theme="classic"] .tab-item.active {
+  background: #E2231A;
+  color: #FFFFFF;
+  border-color: #E2231A;
+  border-bottom-color: #E2231A;
+}
+
+/* Bold retro card styling */
+html[data-theme="classic"] .transfer-card {
+  border: 4px solid #E2231A;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.25);
+  border-radius: 0;
+}
+
+html[data-theme="classic"] .tactical-pitch {
+  border: 4px solid rgba(255,255,255,0.2);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+  border-radius: 0;
+}
+
+/* Retro landing — solid background, no radial glows */
+html[data-theme="classic"] .landing-bg {
+  background: #0B1D51;
+}
+
+html[data-theme="classic"] .grid-lines {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+}
+
+/* ─── Tactical pitch ──────────────────────────────────── */
+.tactical-pitch {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 12px 0;
+}
+/* Dot grid overlay */
+.tactical-pitch::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--primary) 0.5px,
+    transparent 0.5px
+  );
+  background-size: 24px 24px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* ─── Player card ──────────────────────────────────────── */
+.player-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: transform 0.12s ease;
+  cursor: default;
+}
+.player-card:hover { transform: translateY(-2px); }
+
+.player-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: 2px solid;
+  position: relative;
+}
+.player-name {
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 72px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--foreground);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.player-name-pill {
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 72px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--foreground);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.player-stat {
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  color: var(--primary);
+  font-weight: 500;
+}
+.captain-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  pointer-events: none;
+}
+.captain-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 8px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono), monospace;
+  z-index: 1;
+}
+
+/* ─── Skeleton ─────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: 4px;
+}
+
+/* ─── Score bar ────────────────────────────────────────── */
+.score-track {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.score-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-glow));
+  border-radius: 2px;
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Unlock scan sequence (landing page) ──────────────── */
+
+/* Scan track — replaces the submit button during loading */
+.scan-track {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--primary-border-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Green fill that sweeps left-to-right */
+.scan-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-bg-subtle), var(--primary-bg-strong));
+  transition: width 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 4px;
+}
+
+/* Glowing leading edge on the sweep */
+.scan-fill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: -20%; bottom: -20%;
+  width: 28px;
+  background: radial-gradient(ellipse at left, var(--primary-bg-strong) 0%, transparent 75%);
+  pointer-events: none;
+}
+
+/* "SCANNING · {id}" label inside the track */
+.scan-label {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--primary);
+  opacity: 0.6;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* "TEAM UNLOCKED" reveal */
+.unlock-granted {
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-shadow: 0 0 24px var(--primary-bg-strong);
+  animation: granted-reveal 0.3s ease forwards;
+}
+
+@keyframes granted-reveal {
+  from { opacity: 0; transform: scale(0.97) translateY(4px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* ─── Padlock shackle animation (landing page) ─────────── */
+/* Only the keyframe lives here — all other properties are
+   applied as inline styles in team-id-form.tsx so they
+   cannot be purged or reordered by CSS processing. */
+@keyframes shackle-swivel {
+  0%   { transform: rotate(0deg); }
+  8%   { transform: rotate(4deg); }    /* brief resistance before the shackle releases */
+  82%  { transform: rotate(-68deg); }  /* slight overshoot */
+  100% { transform: rotate(-62deg); }  /* settle open */
+}
+
+/* ─── FDR cell ─────────────────────────────────────────── */
+.fdr-cell {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: 3px;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 52px;
+}
+
+/* ─── Transfer card ────────────────────────────────────── */
+.transfer-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+.transfer-arrow {
+  color: var(--primary);
+  font-size: 20px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* ─── Theme toggle ─────────────────────────────────────── */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s, background 0.2s;
+}
+.theme-toggle:hover {
+  border-color: var(--primary);
+  background: var(--primary-bg-subtle);
+}
