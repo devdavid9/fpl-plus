@@ -20,7 +20,7 @@ async def _fetch(path: str) -> dict:
     async with httpx.AsyncClient(timeout=10) as client:
         resp = await client.get(
             f"{FPL_BASE}{path}",
-            headers={"User-Agent": "fpl-plus/1.0"},
+            headers={"User-Agent": "fpl-unlocked/1.0"},
         )
         resp.raise_for_status()
         return resp.json()

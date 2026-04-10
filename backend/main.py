@@ -7,7 +7,7 @@ import os
 
 from app.routers import team, decisions
 
-app = FastAPI(title="FPL+", version="0.1.0")
+app = FastAPI(title="FPL Unlocked", version="0.1.0")
 
 ALLOWED_ORIGINS = os.getenv("FRONTEND_URL", "*")
 if ALLOWED_ORIGINS != "*":
